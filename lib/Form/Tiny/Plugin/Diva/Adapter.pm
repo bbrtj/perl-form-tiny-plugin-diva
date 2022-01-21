@@ -47,6 +47,13 @@ sub prefill
 	return $self->_ftpd_tweak($generated);
 }
 
+sub hidden
+{
+	my $self = shift;
+	return $self->SUPER::hidden($self->{form_instance}->input, @_);
+}
+
+
 sub datavalues
 {
 	my $self = shift;
