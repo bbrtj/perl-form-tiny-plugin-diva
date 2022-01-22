@@ -8,19 +8,25 @@ our $VERSION = '1.00';
 
 use parent 'Form::Diva';
 
+sub _ftpd_generate_errors
+{
+	my ($self, $errors_arr) = @_;
+	my $error_class = $self->{error_class};
+
+	return join '', map {
+		qq|<div class="$error_class">$_</div>|
+	} @{$errors_arr};
+}
+
 sub _ftpd_tweak
 {
 	my ($self, $generated) = @_;
 
-	my $error_class = $self->{error_class};
 	my $errors = $self->{form_instance}->errors_hash;
 	for my $field (@{$generated}) {
 		my $extra_data = $field->{comment};
 
-		my $errors_html = join '', map {
-			qq|<div class="$error_class">$_</div>|
-		} @{$errors->{$extra_data->{name}}};
-		$field->{errors} = $errors_html;
+		$field->{errors} = $self->_ftpd_generate_errors($errors->{$extra_data->{name}});
 
 		# TODO: https://github.com/brainbuz/form-diva/issues/6
 		$field->{label} = ''
@@ -64,6 +70,13 @@ sub datavalues
 	else {
 		return $self->SUPER::datavalues(@_);
 	}
+}
+
+sub form_errors
+{
+	my ($self) = @_;
+
+	$self->_ftpd_generate_errors($self->{form_instance}->errors_hash->{''});
 }
 
 1;
