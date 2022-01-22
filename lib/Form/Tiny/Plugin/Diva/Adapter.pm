@@ -34,7 +34,7 @@ sub _ftpd_tweak
 sub generate
 {
 	my $self = shift;
-	my $generated = $self->SUPER::generate($self->{form_instance}->input, @_);
+	my $generated = $self->SUPER::generate(@_ || $self->{form_instance}->input);
 
 	return $self->_ftpd_tweak($generated);
 }
@@ -42,7 +42,7 @@ sub generate
 sub prefill
 {
 	my $self = shift;
-	my $generated = $self->SUPER::prefill($self->{form_instance}->input, @_);
+	my $generated = $self->SUPER::prefill(@_ || $self->{form_instance}->input);
 
 	return $self->_ftpd_tweak($generated);
 }
@@ -50,14 +50,21 @@ sub prefill
 sub hidden
 {
 	my $self = shift;
-	return $self->SUPER::hidden($self->{form_instance}->input, @_);
+	return $self->SUPER::hidden(@_ || $self->{form_instance}->input);
 }
 
 
 sub datavalues
 {
 	my $self = shift;
-	return $self->SUPER::datavalues($self->{form_instance}->input, @_);
+
+	# check if input has references or undefs
+	if (@_ == grep { defined $_ && !ref $_ } @_) {
+		return $self->SUPER::datavalues($self->{form_instance}->input, @_);
+	}
+	else {
+		return $self->SUPER::datavalues(@_);
+	}
 }
 
 1;

@@ -11,7 +11,7 @@ form_field 'shown' => (
 );
 
 form_field 'shown_no_label' => (
-	data => {type => 'text', l => undef},
+	data => {type => 'email', l => undef},
 );
 
 form_field 'not_shown';

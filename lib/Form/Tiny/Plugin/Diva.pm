@@ -48,7 +48,7 @@ sub _build_diva
 
 	for my $field (@{$self->field_defs}) {
 		my %field_data = (
-			hidden => defined $field->data,
+			hidden => !defined $field->data,
 			%{$field->data // {}},
 			name => $field->name,
 		);
@@ -57,7 +57,7 @@ sub _build_diva
 			$field_data{default} = $field->default->($self);
 		}
 
-		my $push_to = $field_data{hidden} ? \@fields : \@hidden;
+		my $push_to = $field_data{hidden} ? \@hidden : \@fields;
 		push @$push_to, {%field_data, comment => \%field_data};
 	}
 

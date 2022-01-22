@@ -14,16 +14,16 @@ subtest 'test empty diva' => sub {
 	is scalar @$data, 2, 'field with no data section not returned';
 
 	like $data->[0]{label}, qr{>Shown</label>}i, 'correct label generated';
-	like $data->[0]{input}, qr{name="shown"}, 'correct name generated';
-	like $data->[0]{input}, qr{type="text"}, 'correct type generated';
+	like $data->[0]{input}, qr{name=.shown}, 'correct name generated';
+	like $data->[0]{input}, qr{type=.text}, 'correct type generated';
 
 	is $data->[1]{label}, '', 'correct label generated';
-	like $data->[1]{input}, qr{name="shown_no_label"}, 'correct name generated';
-	like $data->[1]{input}, qr{type="text"}, 'correct type generated';
+	like $data->[1]{input}, qr{name=.shown_no_label.}, 'correct name generated';
+	like $data->[1]{input}, qr{type=.email}, 'correct type generated';
 
 	is_deeply $form->diva->prefill, $data, 'prefill works';
 
-	like $form->diva->hidden, qr{name="not_shown"}, 'hidden works';
+	like $form->diva->hidden, qr{name=.not_shown}, 'hidden works';
 };
 
 subtest 'test filled diva' => sub {
@@ -35,11 +35,11 @@ subtest 'test filled diva' => sub {
 
 	$form->set_input(\%input);
 	my $data = $form->diva->generate;
-	like $data->[0]{input}, qr{$input{shown}}, 'field value included';
-	like $data->[1]{input}, qr{$input{shown_no_label}}, 'field value included';
+	like $data->[0]{input}, qr{value=.$input{shown}}, 'field value included';
+	like $data->[1]{input}, qr{value=.$input{shown_no_label}}, 'field value included';
 
 	is_deeply $form->diva->prefill, $data, 'prefill works';
-	like $form->diva->hidden, qr{$input{not_shown}}, 'hidden field value included';
+	like $form->diva->hidden, qr{value=.$input{not_shown}}, 'hidden field value included';
 };
 
 subtest 'test diva datavalues' => sub {
@@ -54,7 +54,7 @@ subtest 'test diva datavalues' => sub {
 		{
 			id => 'formdiva_shown_no_label',
 			name => 'shown_no_label',
-			type => 'text',
+			type => 'email',
 			label => 'Shown_no_label', # TODO: this needs fixing inside Form::Diva
 			value => '--shown-no-label-value--',
 		}
