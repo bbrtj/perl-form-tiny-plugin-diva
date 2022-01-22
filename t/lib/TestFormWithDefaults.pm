@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-use Form::Tiny -plugins => [qw(Diva)];
+use Form::Tiny plugins => [qw(Diva)];
 
 form_field 'shown_default' => (
 	default => sub { 'shown-default' },
