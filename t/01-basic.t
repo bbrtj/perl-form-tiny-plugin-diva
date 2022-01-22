@@ -23,7 +23,9 @@ subtest 'test empty diva' => sub {
 
 	is_deeply $form->diva->prefill, $data, 'prefill works';
 
-	like $form->diva->hidden, qr{name=.not_shown}, 'hidden works';
+	my $hidden = $form->diva->hidden;
+	like $hidden, qr{name=.not_shown}, 'hidden has field 1';
+	like $hidden, qr{name=.manual_hidden}, 'hidden has field 2';
 };
 
 subtest 'test filled diva' => sub {
@@ -31,6 +33,7 @@ subtest 'test filled diva' => sub {
 		shown => '--shown-value--',
 		shown_no_label => '--shown-no-label-value--',
 		not_shown => '--not-shown-value--',
+		manual_hidden => '--manual-hidden-value--',
 	);
 
 	$form->set_input(\%input);
@@ -39,7 +42,10 @@ subtest 'test filled diva' => sub {
 	like $data->[1]{input}, qr{value=.$input{shown_no_label}}, 'field value included';
 
 	is_deeply $form->diva->prefill, $data, 'prefill works';
-	like $form->diva->hidden, qr{value=.$input{not_shown}}, 'hidden field value included';
+
+	my $hidden = $form->diva->hidden;
+	like $hidden, qr{value=.$input{not_shown}}, 'hidden field value included';
+	like $hidden, qr{value=.$input{manual_hidden}}, 'manual hidden field value included';
 };
 
 subtest 'test diva datavalues' => sub {

@@ -16,4 +16,8 @@ form_field 'shown_no_label' => (
 
 form_field 'not_shown';
 
+form_field 'manual_hidden' => (
+	data => {type => 'hidden'},
+);
+
 1;
