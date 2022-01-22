@@ -10,6 +10,14 @@ form_field 'shown' => (
 	data => {type => 'text'},
 );
 
+field_validator '--text-must-be-short--' => sub {
+	return length pop() < 5;
+};
+
+field_validator '--text-must-be-very-short--' => sub {
+	return length pop() < 2;
+};
+
 form_field 'shown_no_label' => (
 	data => {type => 'email', l => undef},
 );
