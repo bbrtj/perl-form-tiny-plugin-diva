@@ -11,7 +11,7 @@ extends 'TestBaseFormConfigured';
 diva_config
 	'id_base' => 'myident-',
 	'label_class' => 'mylabel-class',
-;
+	;
 
 diva_config 'error_class' => 'myerror-class';
 

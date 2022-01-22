@@ -36,7 +36,7 @@ after 'inherit_from' => sub {
 	my ($self, $parent) = @_;
 
 	if ($parent->DOES('Form::Tiny::Plugin::Diva::MetaRole')) {
-			$self->set_diva_config({%{$parent->diva_config}, %{$self->diva_config}});
+		$self->set_diva_config({%{$parent->diva_config}, %{$self->diva_config}});
 	}
 };
 

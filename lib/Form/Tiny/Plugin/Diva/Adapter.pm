@@ -53,7 +53,6 @@ sub hidden
 	return $self->SUPER::hidden(@_ || $self->{form_instance}->input);
 }
 
-
 sub datavalues
 {
 	my $self = shift;

@@ -61,7 +61,7 @@ subtest 'test diva datavalues' => sub {
 			id => 'form-field-shown_no_label',
 			name => 'shown_no_label',
 			type => 'email',
-			label => 'Shown_no_label', # TODO: this needs fixing inside Form::Diva
+			label => 'Shown_no_label',    # TODO: this needs fixing inside Form::Diva
 			value => '--shown-no-label-value--',
 		}
 	];
