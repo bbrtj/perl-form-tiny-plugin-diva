@@ -51,14 +51,14 @@ subtest 'test filled diva' => sub {
 subtest 'test diva datavalues' => sub {
 	my $wanted = [
 		{
-			id => 'formdiva_shown',
+			id => 'form-field-shown',
 			name => 'shown',
 			type => 'text',
 			label => 'Shown',
 			value => '--shown-value--',
 		},
 		{
-			id => 'formdiva_shown_no_label',
+			id => 'form-field-shown_no_label',
 			name => 'shown_no_label',
 			type => 'email',
 			label => 'Shown_no_label', # TODO: this needs fixing inside Form::Diva

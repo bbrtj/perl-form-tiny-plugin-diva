@@ -10,9 +10,11 @@ use Moo::Role;
 
 has 'diva_config' => (
 	is => 'ro',
+	writer => 'set_diva_config',
 	default => sub {
 		return {
-			label_class => 'col-sm-12 form-label',
+			id_base => 'form-field-',
+			label_class => 'form-label',
 			input_class => 'form-control',
 			error_class => 'invalid-feedback',
 		};
@@ -21,11 +23,22 @@ has 'diva_config' => (
 
 sub add_diva_config
 {
-	my ($self, $key, $value) = @_;
+	my ($self, %config) = @_;
 
-	$self->diva_config->{$key} = $value;
+	for my $key (keys %config) {
+		$self->diva_config->{$key} = $config{$key};
+	}
+
 	return;
 }
+
+after 'inherit_from' => sub {
+	my ($self, $parent) = @_;
+
+	if ($parent->DOES('Form::Tiny::Plugin::Diva::MetaRole')) {
+			$self->set_diva_config({%{$parent->diva_config}, %{$self->diva_config}});
+	}
+};
 
 1;
 
