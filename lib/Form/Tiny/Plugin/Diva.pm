@@ -4,7 +4,7 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 use Form::Tiny::Plugin::Diva::Adapter;
 use Form::Tiny::Plugin::Diva::MetaRole;
