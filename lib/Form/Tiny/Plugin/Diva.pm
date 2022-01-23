@@ -56,7 +56,8 @@ sub _build_diva
 			$field_data{default} = $field->default->($self);
 		}
 
-		my $push_to = lc $field_data{type} eq 'hidden' ? \@hidden : \@fields;
+		my $type = $field_data{type} // $field_data{t};
+		my $push_to = lc $type eq 'hidden' ? \@hidden : \@fields;
 		push @$push_to, {%field_data, comment => \%field_data};
 	}
 

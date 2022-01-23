@@ -8,7 +8,7 @@ use Form::Tiny plugins => [qw(Diva)];
 
 form_field 'shown_default' => (
 	default => sub { 'shown-default' },
-	data => {type => 'text'},
+	data => {t => 'text'},
 );
 
 form_field 'shown_default_overridden' => (
