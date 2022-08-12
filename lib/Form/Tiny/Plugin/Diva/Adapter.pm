@@ -4,8 +4,6 @@ use v5.10;
 use strict;
 use warnings;
 
-our $VERSION = '1.02';
-
 use parent 'Form::Diva';
 
 sub _ftpd_generate_errors
@@ -82,3 +80,4 @@ sub form_errors
 1;
 
 __END__
+
